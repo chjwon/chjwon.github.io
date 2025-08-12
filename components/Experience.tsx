@@ -14,7 +14,7 @@ export default function Experience() {
                 <p className="period">Aug 2024 - Feb 2025</p>
                 <p className="mentor">Mentor: Kyo Lee</p>
                 <p className="description">
-                  Engaged in NASA AIST's Geometric Deep Learning for anomaly detection, 
+                  Engaged in NASA AIST&apos;s Geometric Deep Learning for anomaly detection, 
                   developing innovative physics-inspired deep learning models for wildfire prediction.
                 </p>
               </div>

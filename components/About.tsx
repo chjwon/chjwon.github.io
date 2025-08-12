@@ -37,11 +37,11 @@ export default function About() {
               Hello! I&apos;m Jae Won Choi, a Ph.D. student in Computer Science at the 
               University of Southern California (USC), advised by Prof. Ruishan Liu. 
               My research interests span <strong style={{ color: '#1f2937', fontWeight: '600' }}>Machine Learning</strong>, <strong style={{ color: '#1f2937', fontWeight: '600' }}>Graph Neural Networks</strong>, 
-              <strong style={{ color: '#1f2937', fontWeight: '600' }}>Physics-Informed Machine Learning</strong>, and <strong style={{ color: '#1f2937', fontWeight: '600' }}>Computational Biology</strong>.
+              <strong style={{ color: '#1f2937', fontWeight: '600' }}> Physics-Informed Machine Learning</strong>, and <strong style={{ color: '#1f2937', fontWeight: '600' }}>Computational Biology</strong>.
             </p>
             <p>
               I completed my B.S. in Computer Science at the University of Texas at Dallas, 
-              where I was advised by Prof. Yulia Gel and Prof. Vincent Ng.
+              where I was advised by Prof. Yulia Gel, Prof. Vincent Ng, and Prof. Yuzhou Chen.
             </p>
             <p>
               During my undergraduate years, I had the opportunity to intern at:
@@ -57,9 +57,10 @@ export default function About() {
               flexDirection: 'column',
               gap: '8px'
             }}>
-              <li><strong style={{ color: '#1f2937', fontWeight: '600' }}>NASA Jet Propulsion Laboratory</strong> through the Visiting Student Research Program (VSRP)</li>
+              <li><strong style={{ color: '#1f2937', fontWeight: '600' }}>NASA Jet Propulsion Laboratory</strong> through the Visiting Student Research Program (JVSRP)</li>
               <li><strong style={{ color: '#1f2937', fontWeight: '600' }}>Naval Postgraduate School</strong> via the Naval Research Enterprise Internship Program (NREIP)</li>
               <li><strong style={{ color: '#1f2937', fontWeight: '600' }}>Nasdaq Inc.</strong> as an Analytics Software Engineering Intern</li>
+              <li><strong style={{ color: '#1f2937', fontWeight: '600' }}>Quantit Inc.</strong> as an Backend Developer Intern</li>
             </ul>
           </div>
         </div>

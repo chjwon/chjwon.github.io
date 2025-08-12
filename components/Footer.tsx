@@ -134,7 +134,7 @@ export default function Footer() {
                 margin: '0',
                 fontSize: '0.875rem'
               }}>
-                © 2024 Jae Won Choi. All rights reserved.
+                © 2025 Jae Won Choi. All rights reserved.
               </p>
               <p style={{
                 marginTop: '8px',

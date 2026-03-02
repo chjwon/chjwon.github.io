@@ -246,6 +246,40 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
   )
 }
 
+function OrgLogo({ logo, abbreviation }: { logo: string; abbreviation: string }) {
+  const [imgFailed, setImgFailed] = useState(false)
+  if (imgFailed) {
+    return (
+      <span
+        style={{
+          fontFamily: 'var(--font-geist-mono), monospace',
+          fontSize: '0.6rem',
+          color: 'var(--text-ghost)',
+          letterSpacing: '0.06em',
+          textTransform: 'uppercase',
+        }}
+      >
+        {abbreviation}
+      </span>
+    )
+  }
+  return (
+    <img
+      src={logo}
+      alt={abbreviation}
+      onError={() => setImgFailed(true)}
+      style={{
+        height: '28px',
+        width: 'auto',
+        maxWidth: '72px',
+        objectFit: 'contain',
+        opacity: 0.45,
+        filter: 'grayscale(100%)',
+      }}
+    />
+  )
+}
+
 function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
   return (
     <div
@@ -257,6 +291,7 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
         borderTop: isFirst ? '1px solid var(--border)' : '1px solid var(--border-subtle)',
         borderBottom: '1px solid var(--border-subtle)',
         transition: 'background 0.2s',
+        alignItems: 'center',
       }}
       onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--hover-bg-strong)')}
       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
@@ -291,17 +326,21 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
           </p>
         )}
       </div>
-      <span
-        style={{
-          fontFamily: 'var(--font-geist-mono), monospace',
-          fontSize: '0.68rem',
-          color: 'var(--text-ghost)',
-          whiteSpace: 'nowrap',
-          paddingTop: '2px',
-        }}
-      >
-        {exp.period}
-      </span>
+
+      {/* Right: logo + period */}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '10px' }}>
+        <OrgLogo logo={exp.logo} abbreviation={exp.abbreviation} />
+        <span
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.68rem',
+            color: 'var(--text-ghost)',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {exp.period}
+        </span>
+      </div>
     </div>
   )
 }

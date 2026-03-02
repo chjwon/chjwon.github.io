@@ -129,6 +129,7 @@ export const portfolio: PortfolioData = {
       authors: 'Park J., Nguyen K., Park J., Kim J., Lee J., Choi J., et al.',
       venue: 'EMNLP 2025 Findings',
       status: 'published',
+      link: 'https://aclanthology.org/2025.findings-emnlp.871/', // Add paper URL here
     },
     {
       title: 'SNN-PDE: Learning Dynamic PDEs from Data with Simplicial Neural Networks',
@@ -136,6 +137,7 @@ export const portfolio: PortfolioData = {
       venue: 'AAAI 2024',
       acceptance: '23.75%',
       status: 'published',
+      link: 'https://ojs.aaai.org/index.php/AAAI/article/view/29038', // Add paper URL here
     },
     {
       title: 'Revisiting Link Prediction with the Dowker Complex',
@@ -143,12 +145,14 @@ export const portfolio: PortfolioData = {
       venue: 'PAKDD 2024',
       award: 'Best Paper — ASA Statistical Graphics 2024',
       status: 'published',
+      link: 'https://link.springer.com/chapter/10.1007/978-981-97-2253-2_33', // Add paper URL here
     },
     {
       title: 'Self-supervised Contrastive Learning for Wildfire Detection',
       authors: 'Choi J., LaHaye N., Chen Y., Lee H., Gel Y.',
       venue: 'Elsevier Book Chapter / GeoAI 2024',
       status: 'published',
+      link: 'https://www.sciencedirect.com/science/chapter/edited-volume/abs/pii/B9780443190773000134', // Add paper URL here
     },
 
     {
@@ -156,12 +160,14 @@ export const portfolio: PortfolioData = {
       authors: 'Choi J., Chen Y., Xia K., Rondon I., Gel Y.',
       venue: 'Under Review',
       status: 'under_review',
+      link: '', // Add paper URL here
     },
     {
       title: 'DKTM: Dynamic Keyword-based Topic Modeling for Lifelong Learning',
       authors: 'Choi J., Nguyen V.',
       venue: 'UTD Research Scholar Award',
       status: 'under_review',
+      link: '', // Add paper URL here
     },
   ],
 
@@ -252,7 +258,7 @@ export const portfolio: PortfolioData = {
     country: 'USA',
     affiliation: 'University of Southern California',
     department: 'Department of Computer Science',
-    lab: '[Lab Name — e.g., Ruishan Liu Lab]',
+    lab: 'Laboratory for Machine Learning, Health and Biomedicine',
     advisor: 'Prof. Ruishan Liu',
     status: 'Ph.D. Student (Year 1)',
     startYear: '2025',

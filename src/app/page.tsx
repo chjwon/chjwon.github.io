@@ -1,18 +1,20 @@
-import Hero from '../../components/Hero'
-import About from '../../components/About'
+import NavBar from '../../components/NavBar'
+import Home from '../../components/Home'
 import Education from '../../components/Education'
-import Experience from '../../components/Experience'
-import Publications from '../../components/Publications'
+import Research from '../../components/Research'
+import Others from '../../components/Others'
+import WhereAmINow from '../../components/WhereAmINow'
 import Footer from '../../components/Footer'
 
-export default function Home() {
+export default function Page() {
   return (
-    <main className="min-h-screen bg-white dark:bg-gray-900">
-      <Hero />
-      <About />
+    <main style={{ minHeight: '100vh', background: 'white' }}>
+      <NavBar />
+      <Home />
       <Education />
-      <Experience />
-      <Publications />
+      <Research />
+      <Others />
+      <WhereAmINow />
       <Footer />
     </main>
   )

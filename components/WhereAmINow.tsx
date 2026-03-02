@@ -27,7 +27,7 @@ export default function WhereAmINow() {
     <section
       id="where-am-i-now"
       style={{
-        background: '#0c0c0c',
+        background: 'var(--bg)',
         padding: '120px 32px 160px',
         maxWidth: '1120px',
         margin: '0 auto',
@@ -42,7 +42,7 @@ export default function WhereAmINow() {
         style={{
           fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)',
           fontWeight: 600,
-          color: '#555',
+          color: 'var(--text-dim)',
           letterSpacing: '-0.02em',
           lineHeight: 1.3,
           marginBottom: '64px',
@@ -50,9 +50,9 @@ export default function WhereAmINow() {
         }}
       >
         Currently at{' '}
-        <span style={{ color: '#c8c8c8' }}>{currentLocation.affiliation}</span>
+        <span style={{ color: 'var(--text)' }}>{currentLocation.affiliation}</span>
         {' '}pursuing a Ph.D. in{' '}
-        <span style={{ color: '#c8c8c8' }}>Computer Science</span>.
+        <span style={{ color: 'var(--text)' }}>Computer Science</span>.
       </p>
 
       {/* Two-column: fields + open to */}
@@ -73,14 +73,14 @@ export default function WhereAmINow() {
                 gridTemplateColumns: '120px 1fr',
                 gap: '16px',
                 padding: '12px 0',
-                borderTop: i === 0 ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
+                borderTop: i === 0 ? '1px solid var(--border)' : '1px solid var(--border-subtle)',
               }}
             >
               <span
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '0.65rem',
-                  color: '#2d2d2d',
+                  color: 'var(--text-ghost)',
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   paddingTop: '2px',
@@ -91,7 +91,7 @@ export default function WhereAmINow() {
               <span
                 style={{
                   fontSize: '0.85rem',
-                  color: '#888',
+                  color: 'var(--text-muted)',
                   lineHeight: 1.4,
                 }}
               >
@@ -99,7 +99,7 @@ export default function WhereAmINow() {
               </span>
             </div>
           ))}
-          <div style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }} />
+          <div style={{ borderBottom: '1px solid var(--border-subtle)' }} />
         </div>
 
         {/* Open to */}
@@ -108,7 +108,7 @@ export default function WhereAmINow() {
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '0.65rem',
-              color: '#2d2d2d',
+              color: 'var(--text-ghost)',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               marginBottom: '24px',
@@ -122,7 +122,7 @@ export default function WhereAmINow() {
                 key={item}
                 style={{
                   fontSize: '0.85rem',
-                  color: '#555',
+                  color: 'var(--text-dim)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
@@ -134,7 +134,7 @@ export default function WhereAmINow() {
                     width: '3px',
                     height: '3px',
                     borderRadius: '50%',
-                    background: '#2d2d2d',
+                    background: 'var(--text-ghost)',
                     flexShrink: 0,
                   }}
                 />
@@ -142,23 +142,23 @@ export default function WhereAmINow() {
               </span>
             ))}
           </div>
-          <p style={{ fontSize: '0.82rem', color: '#333' }}>
+          <p style={{ fontSize: '0.82rem', color: 'var(--text-faint)' }}>
             Reach out at{' '}
             <a
               href={`mailto:${email}`}
               style={{
-                color: '#555',
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                color: 'var(--text-dim)',
+                borderBottom: '1px solid var(--link-border)',
                 paddingBottom: '1px',
                 transition: 'color 0.2s, border-color 0.2s',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = '#d4d4d4'
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
+                e.currentTarget.style.color = 'var(--text)'
+                e.currentTarget.style.borderColor = 'var(--link-border-hover)'
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = '#555'
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
+                e.currentTarget.style.color = 'var(--text-dim)'
+                e.currentTarget.style.borderColor = 'var(--link-border)'
               }}
             >
               {email}

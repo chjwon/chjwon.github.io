@@ -15,7 +15,7 @@ export default function Research() {
     <section
       id="research"
       style={{
-        background: '#0c0c0c',
+        background: 'var(--bg)',
         padding: '120px 32px',
         maxWidth: '1120px',
         margin: '0 auto',
@@ -30,7 +30,7 @@ export default function Research() {
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '0.7rem',
-          color: '#2d2d2d',
+          color: 'var(--text-ghost)',
           letterSpacing: '0.05em',
           textTransform: 'uppercase',
           marginBottom: '56px',
@@ -45,7 +45,7 @@ export default function Research() {
           display: 'flex',
           gap: '0',
           marginBottom: '48px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid var(--border)',
         }}
       >
         {(['publications', 'experience'] as const).map((t) => (
@@ -62,13 +62,13 @@ export default function Research() {
               fontFamily: 'var(--font-geist-mono), monospace',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: tab === t ? '#d4d4d4' : '#333',
-              borderBottom: tab === t ? '1px solid #d4d4d4' : '1px solid transparent',
+              color: tab === t ? 'var(--text)' : 'var(--text-ghost)',
+              borderBottom: tab === t ? '1px solid var(--text)' : '1px solid transparent',
               marginBottom: '-1px',
               transition: 'color 0.2s',
             }}
-            onMouseEnter={(e) => { if (tab !== t) e.currentTarget.style.color = '#666' }}
-            onMouseLeave={(e) => { if (tab !== t) e.currentTarget.style.color = '#333' }}
+            onMouseEnter={(e) => { if (tab !== t) e.currentTarget.style.color = 'var(--text-dim)' }}
+            onMouseLeave={(e) => { if (tab !== t) e.currentTarget.style.color = 'var(--text-ghost)' }}
           >
             {t === 'publications' ? 'Publications' : 'Experience'}
           </button>
@@ -84,7 +84,7 @@ export default function Research() {
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '0.65rem',
-                  color: '#2d2d2d',
+                  color: 'var(--text-ghost)',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   marginBottom: '24px',
@@ -106,7 +106,7 @@ export default function Research() {
                 style={{
                   fontFamily: 'var(--font-geist-mono), monospace',
                   fontSize: '0.65rem',
-                  color: '#2d2d2d',
+                  color: 'var(--text-ghost)',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
                   marginBottom: '24px',
@@ -144,7 +144,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
         gridTemplateColumns: '32px 1fr auto',
         gap: '16px',
         padding: '20px 0',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
+        borderTop: '1px solid var(--border-subtle)',
         alignItems: 'start',
         opacity: dimmed ? 0.5 : 1,
         transition: 'opacity 0.2s',
@@ -157,7 +157,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '0.65rem',
-          color: '#2d2d2d',
+          color: 'var(--text-ghost)',
           paddingTop: '3px',
         }}
       >
@@ -170,7 +170,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
           style={{
             fontSize: '0.95rem',
             fontWeight: 500,
-            color: '#c8c8c8',
+            color: 'var(--text)',
             lineHeight: 1.4,
             marginBottom: '6px',
             letterSpacing: '-0.005em',
@@ -182,8 +182,8 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'inherit', transition: 'color 0.2s' }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#e8e8e8')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#c8c8c8')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text)')}
             >
               {pub.title} ↗
             </a>
@@ -192,7 +192,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
         <p
           style={{
             fontSize: '0.78rem',
-            color: '#3d3d3d',
+            color: 'var(--text-faint)',
             lineHeight: 1.5,
             marginBottom: pub.award ? '8px' : '0',
           }}
@@ -204,10 +204,10 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '0.62rem',
-              color: '#5a4a20',
+              color: 'var(--award-color)',
               letterSpacing: '0.06em',
               textTransform: 'uppercase',
-              borderBottom: '1px solid #3a3010',
+              borderBottom: '1px solid var(--award-border)',
               paddingBottom: '1px',
             }}
           >
@@ -222,7 +222,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.68rem',
-            color: '#3a3a3a',
+            color: 'var(--text-faint)',
             display: 'block',
             marginBottom: pub.acceptance ? '4px' : '0',
             whiteSpace: 'nowrap',
@@ -235,7 +235,7 @@ function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: numbe
             style={{
               fontFamily: 'var(--font-geist-mono), monospace',
               fontSize: '0.6rem',
-              color: '#2a2a2a',
+              color: 'var(--text-ghost)',
             }}
           >
             {pub.acceptance} acc.
@@ -254,11 +254,11 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
         gridTemplateColumns: '1fr auto',
         gap: '24px',
         padding: '28px 0',
-        borderTop: isFirst ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
-        borderBottom: '1px solid rgba(255,255,255,0.04)',
+        borderTop: isFirst ? '1px solid var(--border)' : '1px solid var(--border-subtle)',
+        borderBottom: '1px solid var(--border-subtle)',
         transition: 'background 0.2s',
       }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.012)')}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--hover-bg-strong)')}
       onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
     >
       <div>
@@ -266,7 +266,7 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.65rem',
-            color: '#2d2d2d',
+            color: 'var(--text-ghost)',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             marginBottom: '8px',
@@ -278,7 +278,7 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
           style={{
             fontSize: '1rem',
             fontWeight: 500,
-            color: '#c8c8c8',
+            color: 'var(--text)',
             marginBottom: '6px',
             letterSpacing: '-0.01em',
           }}
@@ -286,7 +286,7 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
           {exp.role}
         </h3>
         {(exp.mentor || exp.advisor) && (
-          <p style={{ fontSize: '0.78rem', color: '#3a3a3a' }}>
+          <p style={{ fontSize: '0.78rem', color: 'var(--text-faint)' }}>
             {exp.mentor ? 'Mentor' : 'Advisor'}: {exp.mentor ?? exp.advisor}
           </p>
         )}
@@ -295,7 +295,7 @@ function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '0.68rem',
-          color: '#2d2d2d',
+          color: 'var(--text-ghost)',
           whiteSpace: 'nowrap',
           paddingTop: '2px',
         }}

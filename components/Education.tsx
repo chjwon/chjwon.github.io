@@ -9,7 +9,7 @@ export default function Education() {
     <section
       id="education"
       style={{
-        background: '#0c0c0c',
+        background: 'var(--bg)',
         padding: '120px 32px',
         maxWidth: '1120px',
         margin: '0 auto',
@@ -29,11 +29,11 @@ export default function Education() {
               gap: '24px',
               alignItems: 'start',
               padding: '32px 0',
-              borderBottom: '1px solid rgba(255,255,255,0.06)',
-              borderTop: i === 0 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+              borderBottom: '1px solid var(--border)',
+              borderTop: i === 0 ? '1px solid var(--border)' : 'none',
               transition: 'background 0.2s',
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.015)')}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--hover-bg)')}
             onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
           >
             {/* Left: institution + degree */}
@@ -42,7 +42,7 @@ export default function Education() {
                 style={{
                   fontSize: '0.7rem',
                   fontFamily: 'var(--font-geist-mono), monospace',
-                  color: '#3a3a3a',
+                  color: 'var(--text-faint)',
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
                   marginBottom: '8px',
@@ -54,7 +54,7 @@ export default function Education() {
                 style={{
                   fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)',
                   fontWeight: 600,
-                  color: '#d4d4d4',
+                  color: 'var(--text)',
                   letterSpacing: '-0.01em',
                   marginBottom: '12px',
                   lineHeight: 1.2,
@@ -63,14 +63,34 @@ export default function Education() {
                 {edu.degree}
               </h3>
               {edu.advisor && (
-                <p style={{ fontSize: '0.82rem', color: '#444' }}>
-                  <span style={{ color: '#333', fontFamily: 'var(--font-geist-mono), monospace', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Advisor </span>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-faint)' }}>
+                  <span
+                    style={{
+                      color: 'var(--text-ghost)',
+                      fontFamily: 'var(--font-geist-mono), monospace',
+                      fontSize: '0.7rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    Advisor{' '}
+                  </span>
                   {edu.advisor}
                 </p>
               )}
               {edu.advisors && (
-                <p style={{ fontSize: '0.82rem', color: '#444' }}>
-                  <span style={{ color: '#333', fontFamily: 'var(--font-geist-mono), monospace', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Advisors </span>
+                <p style={{ fontSize: '0.82rem', color: 'var(--text-faint)' }}>
+                  <span
+                    style={{
+                      color: 'var(--text-ghost)',
+                      fontFamily: 'var(--font-geist-mono), monospace',
+                      fontSize: '0.7rem',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em',
+                    }}
+                  >
+                    Advisors{' '}
+                  </span>
                   {edu.advisors.join(', ')}
                 </p>
               )}
@@ -81,7 +101,7 @@ export default function Education() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '0.75rem',
-                color: '#3a3a3a',
+                color: 'var(--text-faint)',
                 letterSpacing: '0.04em',
                 whiteSpace: 'nowrap',
                 paddingTop: '2px',
@@ -111,7 +131,7 @@ export function SectionLabel({ index, title }: { index: string; title: string })
         style={{
           fontFamily: 'var(--font-geist-mono), monospace',
           fontSize: '0.65rem',
-          color: '#2d2d2d',
+          color: 'var(--text-ghost)',
           letterSpacing: '0.1em',
           textTransform: 'uppercase',
         }}
@@ -122,7 +142,7 @@ export function SectionLabel({ index, title }: { index: string; title: string })
         style={{
           fontSize: 'clamp(1.4rem, 3vw, 2rem)',
           fontWeight: 600,
-          color: '#888',
+          color: 'var(--text-muted)',
           letterSpacing: '-0.02em',
         }}
       >

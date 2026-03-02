@@ -14,7 +14,15 @@ const NAV_LINKS = [
 export default function NavBar() {
   const [activeSection, setActiveSection] = useState('home')
   const [menuOpen, setMenuOpen] = useState(false)
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
 
+  /* Sync theme state with whatever the anti-flash script set */
+  useEffect(() => {
+    const current = document.documentElement.getAttribute('data-theme')
+    if (current === 'light') setTheme('light')
+  }, [])
+
+  /* IntersectionObserver for active section */
   useEffect(() => {
     const sectionIds = ['home', 'education', 'research', 'others', 'where-am-i-now']
     const observers: IntersectionObserver[] = []
@@ -37,6 +45,16 @@ export default function NavBar() {
     setMenuOpen(false)
   }
 
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark'
+    setTheme(next)
+    /* Add transition class for smooth palette switch, remove after animation */
+    document.documentElement.classList.add('theme-transition')
+    document.documentElement.setAttribute('data-theme', next)
+    try { localStorage.setItem('theme', next) } catch { /* ignore */ }
+    setTimeout(() => document.documentElement.classList.remove('theme-transition'), 400)
+  }
+
   const initials = portfolio.name.split(' ').map((n) => n[0]).join('')
 
   return (
@@ -47,10 +65,10 @@ export default function NavBar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: 'rgba(12,12,12,0.92)',
+        background: 'var(--nav-bg)',
         backdropFilter: 'blur(16px)',
         WebkitBackdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        borderBottom: '1px solid var(--border)',
       }}
     >
       <div
@@ -71,14 +89,14 @@ export default function NavBar() {
           style={{
             fontSize: '0.8rem',
             fontWeight: 600,
-            color: '#d4d4d4',
+            color: 'var(--text)',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
             fontFamily: 'var(--font-geist-mono), monospace',
             transition: 'color 0.2s',
           }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = '#e8e8e8')}
-          onMouseLeave={(e) => (e.currentTarget.style.color = '#d4d4d4')}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text)')}
         >
           {initials}
         </a>
@@ -100,39 +118,86 @@ export default function NavBar() {
                   letterSpacing: '0.06em',
                   textTransform: 'uppercase',
                   fontFamily: 'var(--font-geist-mono), monospace',
-                  color: isActive ? '#e8e8e8' : '#444',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-faint)',
                   transition: 'color 0.2s',
-                  borderRadius: '3px',
                 }}
-                onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = '#888' }}
-                onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = '#444' }}
+                onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-muted)' }}
+                onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = 'var(--text-faint)' }}
               >
                 {label}
               </a>
             )
           })}
+
+          {/* Theme toggle button */}
+          <button
+            onClick={toggleTheme}
+            style={{
+              marginLeft: '8px',
+              padding: '5px 10px',
+              background: 'none',
+              border: '1px solid var(--border)',
+              cursor: 'pointer',
+              fontSize: '0.62rem',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--text-ghost)',
+              transition: 'color 0.2s, border-color 0.2s',
+              borderRadius: '2px',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--text-muted)'
+              e.currentTarget.style.borderColor = 'var(--text-faint)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text-ghost)'
+              e.currentTarget.style.borderColor = 'var(--border)'
+            }}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? 'light' : 'dark'}
+          </button>
         </div>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="nav-mobile-btn"
-          style={{
-            display: 'none',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            color: '#888',
-            fontSize: '0.75rem',
-            fontFamily: 'var(--font-geist-mono), monospace',
-            letterSpacing: '0.06em',
-            textTransform: 'uppercase',
-            padding: '4px',
-          }}
-          aria-label="Toggle menu"
-        >
-          {menuOpen ? 'close' : 'menu'}
-        </button>
+        {/* Mobile: theme toggle + hamburger */}
+        <div style={{ display: 'none', alignItems: 'center', gap: '12px' }} className="nav-mobile-btn">
+          <button
+            onClick={toggleTheme}
+            style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              cursor: 'pointer',
+              fontSize: '0.62rem',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: 'var(--text-ghost)',
+              padding: '4px 8px',
+              borderRadius: '2px',
+            }}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? 'light' : 'dark'}
+          </button>
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--text-muted)',
+              fontSize: '0.75rem',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              padding: '4px',
+            }}
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? 'close' : 'menu'}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -140,8 +205,8 @@ export default function NavBar() {
         <div
           className="nav-mobile-menu"
           style={{
-            background: '#0e0e0e',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
+            background: 'var(--nav-mobile-bg)',
+            borderTop: '1px solid var(--border)',
             padding: '16px 32px 24px',
           }}
         >
@@ -159,8 +224,8 @@ export default function NavBar() {
                   fontSize: '0.85rem',
                   fontWeight: 500,
                   letterSpacing: '0.04em',
-                  color: isActive ? '#e8e8e8' : '#555',
-                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  color: isActive ? 'var(--text-primary)' : 'var(--text-dim)',
+                  borderBottom: '1px solid var(--border-subtle)',
                   transition: 'color 0.2s',
                 }}
               >
@@ -174,7 +239,7 @@ export default function NavBar() {
       <style>{`
         @media (max-width: 640px) {
           .nav-desktop { display: none !important; }
-          .nav-mobile-btn { display: block !important; }
+          .nav-mobile-btn { display: flex !important; }
         }
         @media (min-width: 641px) {
           .nav-mobile-menu { display: none !important; }

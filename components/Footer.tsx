@@ -16,8 +16,8 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: '#0c0c0c',
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        background: 'var(--bg)',
+        borderTop: '1px solid var(--border)',
         padding: '32px 32px',
         maxWidth: '1120px',
         margin: '0 auto',
@@ -39,7 +39,7 @@ export default function Footer() {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.68rem',
-            color: '#2d2d2d',
+            color: 'var(--text-ghost)',
             letterSpacing: '0.06em',
           }}
         >
@@ -57,13 +57,13 @@ export default function Footer() {
               style={{
                 fontFamily: 'var(--font-geist-mono), monospace',
                 fontSize: '0.68rem',
-                color: '#2d2d2d',
+                color: 'var(--text-ghost)',
                 letterSpacing: '0.06em',
                 textTransform: 'uppercase',
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#888')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#2d2d2d')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-ghost)')}
             >
               {label}
             </a>

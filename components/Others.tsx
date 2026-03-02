@@ -10,7 +10,7 @@ export default function Others() {
     <section
       id="others"
       style={{
-        background: '#0c0c0c',
+        background: 'var(--bg)',
         padding: '120px 32px',
         maxWidth: '1120px',
         margin: '0 auto',
@@ -26,7 +26,7 @@ export default function Others() {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.65rem',
-            color: '#2d2d2d',
+            color: 'var(--text-ghost)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '24px',
@@ -40,20 +40,20 @@ export default function Others() {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
             gap: '1px',
-            background: 'rgba(255,255,255,0.05)',
-            border: '1px solid rgba(255,255,255,0.05)',
+            background: 'var(--grid-gap)',
+            border: '1px solid var(--grid-gap)',
           }}
         >
           {projects.map((project) => (
             <div
               key={project.name}
               style={{
-                background: '#0c0c0c',
+                background: 'var(--bg)',
                 padding: '28px',
                 transition: 'background 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.background = '#111')}
-              onMouseLeave={(e) => (e.currentTarget.style.background = '#0c0c0c')}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--surface)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--bg)')}
             >
               <div
                 style={{
@@ -67,7 +67,7 @@ export default function Others() {
                   style={{
                     fontSize: '0.9rem',
                     fontWeight: 500,
-                    color: '#c8c8c8',
+                    color: 'var(--text)',
                     letterSpacing: '-0.01em',
                   }}
                 >
@@ -81,13 +81,13 @@ export default function Others() {
                     style={{
                       fontFamily: 'var(--font-geist-mono), monospace',
                       fontSize: '0.65rem',
-                      color: '#2d2d2d',
+                      color: 'var(--text-ghost)',
                       transition: 'color 0.2s',
                       flexShrink: 0,
                       marginLeft: '8px',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.color = '#888')}
-                    onMouseLeave={(e) => (e.currentTarget.style.color = '#2d2d2d')}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-ghost)')}
                   >
                     ↗
                   </a>
@@ -96,7 +96,7 @@ export default function Others() {
               <p
                 style={{
                   fontSize: '0.82rem',
-                  color: '#3d3d3d',
+                  color: 'var(--text-faint)',
                   lineHeight: 1.6,
                   marginBottom: '16px',
                 }}
@@ -110,10 +110,10 @@ export default function Others() {
                     style={{
                       fontFamily: 'var(--font-geist-mono), monospace',
                       fontSize: '0.62rem',
-                      color: '#2d2d2d',
+                      color: 'var(--text-ghost)',
                       letterSpacing: '0.05em',
                       textTransform: 'uppercase',
-                      border: '1px solid rgba(255,255,255,0.06)',
+                      border: '1px solid var(--border)',
                       padding: '2px 7px',
                     }}
                   >
@@ -132,7 +132,7 @@ export default function Others() {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.65rem',
-            color: '#2d2d2d',
+            color: 'var(--text-ghost)',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
             marginBottom: '24px',
@@ -150,14 +150,14 @@ export default function Others() {
                 gridTemplateColumns: '200px 1fr',
                 gap: '24px',
                 padding: '16px 0',
-                borderTop: i === 0 ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
+                borderTop: i === 0 ? '1px solid var(--border)' : '1px solid var(--border-subtle)',
                 alignItems: 'start',
               }}
             >
               <span
                 style={{
                   fontSize: '0.85rem',
-                  color: '#555',
+                  color: 'var(--text-dim)',
                   fontWeight: 500,
                 }}
               >
@@ -166,7 +166,7 @@ export default function Others() {
               <span
                 style={{
                   fontSize: '0.82rem',
-                  color: '#333',
+                  color: 'var(--text-ghost)',
                   lineHeight: 1.6,
                 }}
               >
@@ -174,7 +174,7 @@ export default function Others() {
               </span>
             </div>
           ))}
-          <div style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }} />
+          <div style={{ borderBottom: '1px solid var(--border-subtle)' }} />
         </div>
       </div>
     </section>

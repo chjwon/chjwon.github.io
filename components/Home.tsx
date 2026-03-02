@@ -13,9 +13,9 @@ export default function Home() {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        background: '#0c0c0c',
+        background: 'var(--bg)',
         padding: '0 32px 64px',
-        paddingTop: '60px', /* nav height */
+        paddingTop: '60px',
         maxWidth: '1120px',
         margin: '0 auto',
         width: '100%',
@@ -31,14 +31,14 @@ export default function Home() {
           marginBottom: 'auto',
           paddingTop: '80px',
           paddingBottom: '40px',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          borderBottom: '1px solid var(--border)',
         }}
       >
         <span
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.7rem',
-            color: '#3a3a3a',
+            color: 'var(--text-faint)',
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
           }}
@@ -49,7 +49,7 @@ export default function Home() {
           style={{
             fontFamily: 'var(--font-geist-mono), monospace',
             fontSize: '0.7rem',
-            color: '#3a3a3a',
+            color: 'var(--text-faint)',
             letterSpacing: '0.06em',
           }}
         >
@@ -57,14 +57,14 @@ export default function Home() {
         </span>
       </div>
 
-      {/* Main hero content — sits at bottom of viewport */}
+      {/* Main hero content — anchored to bottom */}
       <div style={{ paddingTop: '120px' }}>
         {/* Name — the statement piece */}
         <h1
           style={{
             fontSize: 'clamp(3.2rem, 8.5vw, 8rem)',
             fontWeight: 700,
-            color: '#e8e8e8',
+            color: 'var(--text-primary)',
             letterSpacing: '-0.03em',
             lineHeight: 0.95,
             marginBottom: '48px',
@@ -82,7 +82,7 @@ export default function Home() {
             gap: '40px',
             flexWrap: 'wrap',
             paddingTop: '32px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
+            borderTop: '1px solid var(--border)',
           }}
         >
           {/* Left: title + bio */}
@@ -90,7 +90,7 @@ export default function Home() {
             <p
               style={{
                 fontSize: '0.9rem',
-                color: '#888',
+                color: 'var(--text-muted)',
                 marginBottom: '12px',
                 fontWeight: 500,
               }}
@@ -100,7 +100,7 @@ export default function Home() {
             <p
               style={{
                 fontSize: '0.85rem',
-                color: '#555',
+                color: 'var(--text-dim)',
                 lineHeight: 1.7,
                 marginBottom: '24px',
               }}
@@ -112,7 +112,7 @@ export default function Home() {
               style={{
                 fontSize: '0.72rem',
                 fontFamily: 'var(--font-geist-mono), monospace',
-                color: '#3a3a3a',
+                color: 'var(--text-faint)',
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
               }}
@@ -143,7 +143,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 style={{
                   fontSize: '0.78rem',
-                  color: '#444',
+                  color: 'var(--text-faint)',
                   letterSpacing: '0.04em',
                   textTransform: 'uppercase',
                   fontFamily: 'var(--font-geist-mono), monospace',
@@ -152,8 +152,8 @@ export default function Home() {
                   alignItems: 'center',
                   gap: '6px',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#d4d4d4')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = '#444')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-faint)')}
               >
                 {label}
                 <span style={{ fontSize: '0.65rem', opacity: 0.5 }}>↗</span>

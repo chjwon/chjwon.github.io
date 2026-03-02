@@ -1,12 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-import { portfolio, type Publication } from '../data/portfolio'
-import { SectionHeader } from './Education'
+import { portfolio, type Publication, type Experience } from '../data/portfolio'
+import { SectionLabel } from './Education'
 
 export default function Research() {
   const { publications, experience, researchInterests } = portfolio
-  const [activeTab, setActiveTab] = useState<'publications' | 'experience'>('publications')
+  const [tab, setTab] = useState<'publications' | 'experience'>('publications')
 
   const published = publications.filter((p) => p.status === 'published')
   const underReview = publications.filter((p) => p.status === 'under_review')
@@ -15,320 +15,293 @@ export default function Research() {
     <section
       id="research"
       style={{
-        padding: '100px 0',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+        background: '#0c0c0c',
+        padding: '120px 32px',
+        maxWidth: '1120px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '0 24px' }}>
-        <SectionHeader
-          title="Research"
-          subtitle="Publications, research interests, and academic experience"
-        />
+      <SectionLabel index="03" title="Research" />
 
-        {/* Research interest pills */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            gap: '10px',
-            marginBottom: '48px',
-          }}
-        >
-          {researchInterests.map((interest) => (
-            <span
-              key={interest}
-              style={{
-                padding: '7px 16px',
-                borderRadius: '30px',
-                fontSize: '0.85rem',
-                fontWeight: 600,
-                color: '#3b82f6',
-                background: '#eff6ff',
-                border: '1.5px solid #bfdbfe',
-              }}
-            >
-              {interest}
-            </span>
-          ))}
-        </div>
+      {/* Research areas — single line */}
+      <p
+        style={{
+          fontFamily: 'var(--font-geist-mono), monospace',
+          fontSize: '0.7rem',
+          color: '#2d2d2d',
+          letterSpacing: '0.05em',
+          textTransform: 'uppercase',
+          marginBottom: '56px',
+        }}
+      >
+        {researchInterests.join('  ·  ')}
+      </p>
 
-        {/* Tab switcher */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '8px',
-            marginBottom: '36px',
-            background: 'white',
-            padding: '6px',
-            borderRadius: '12px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
-            width: 'fit-content',
-          }}
-        >
-          {(['publications', 'experience'] as const).map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveTab(tab)}
-              style={{
-                padding: '9px 22px',
-                borderRadius: '8px',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                fontWeight: 600,
-                transition: 'all 0.2s ease',
-                background: activeTab === tab ? '#3b82f6' : 'transparent',
-                color: activeTab === tab ? 'white' : '#6b7280',
-                textTransform: 'capitalize',
-              }}
-            >
-              {tab === 'publications' ? 'Publications' : 'Experience'}
-            </button>
-          ))}
-        </div>
+      {/* Tab toggle */}
+      <div
+        style={{
+          display: 'flex',
+          gap: '0',
+          marginBottom: '48px',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+        }}
+      >
+        {(['publications', 'experience'] as const).map((t) => (
+          <button
+            key={t}
+            onClick={() => setTab(t)}
+            style={{
+              padding: '10px 0',
+              marginRight: '32px',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '0.72rem',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              color: tab === t ? '#d4d4d4' : '#333',
+              borderBottom: tab === t ? '1px solid #d4d4d4' : '1px solid transparent',
+              marginBottom: '-1px',
+              transition: 'color 0.2s',
+            }}
+            onMouseEnter={(e) => { if (tab !== t) e.currentTarget.style.color = '#666' }}
+            onMouseLeave={(e) => { if (tab !== t) e.currentTarget.style.color = '#333' }}
+          >
+            {t === 'publications' ? 'Publications' : 'Experience'}
+          </button>
+        ))}
+      </div>
 
-        {/* Publications */}
-        {activeTab === 'publications' && (
-          <div>
-            {published.length > 0 && (
-              <>
-                <h3
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 700,
-                    color: '#374151',
-                    marginBottom: '16px',
-                  }}
-                >
-                  Published
-                </h3>
-                <div
-                  style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '40px' }}
-                >
-                  {published.map((pub) => (
-                    <PublicationCard key={pub.title} pub={pub} />
-                  ))}
-                </div>
-              </>
-            )}
-
-            {underReview.length > 0 && (
-              <>
-                <h3
-                  style={{
-                    fontSize: '1.1rem',
-                    fontWeight: 700,
-                    color: '#374151',
-                    marginBottom: '16px',
-                  }}
-                >
-                  Under Review
-                </h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                  {underReview.map((pub) => (
-                    <PublicationCard key={pub.title} pub={pub} />
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        )}
-
-        {/* Experience */}
-        {activeTab === 'experience' && (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            {experience.map((exp) => (
-              <div
-                key={exp.role}
+      {/* Publications view */}
+      {tab === 'publications' && (
+        <div>
+          {published.length > 0 && (
+            <div style={{ marginBottom: '56px' }}>
+              <p
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '20px',
-                  background: 'white',
-                  borderRadius: '14px',
-                  padding: '22px 24px',
-                  border: '1px solid #e5e7eb',
-                  borderLeft: `4px solid ${exp.accentColor}`,
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateX(4px)'
-                  e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.08)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateX(0)'
-                  e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '0.65rem',
+                  color: '#2d2d2d',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  marginBottom: '24px',
                 }}
               >
-                {/* Logo */}
-                <div
-                  style={{
-                    flexShrink: 0,
-                    width: '64px',
-                    height: '64px',
-                    borderRadius: '10px',
-                    overflow: 'hidden',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    background: '#f8fafc',
-                    border: '1px solid #e5e7eb',
-                  }}
-                >
-                  <img
-                    src={exp.logo}
-                    alt={exp.org}
-                    style={{ width: '52px', height: 'auto', objectFit: 'contain' }}
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none'
-                      if (e.currentTarget.parentElement) {
-                        e.currentTarget.parentElement.innerHTML = `<span style="color:${exp.accentColor};font-weight:700;font-size:11px;text-align:center;padding:4px">${exp.abbreviation}</span>`
-                      }
-                    }}
-                  />
-                </div>
-
-                <div style={{ flex: 1 }}>
-                  <h3 style={{ fontSize: '1rem', fontWeight: 700, color: '#1f2937', marginBottom: '3px' }}>
-                    {exp.role}
-                  </h3>
-                  <p style={{ fontSize: '0.9rem', fontWeight: 600, color: exp.accentColor, marginBottom: '2px' }}>
-                    {exp.org}
-                  </p>
-                  <p style={{ fontSize: '0.85rem', color: '#6b7280', marginBottom: '4px' }}>
-                    {exp.period}
-                  </p>
-                  {(exp.mentor || exp.advisor) && (
-                    <p style={{ fontSize: '0.85rem', color: '#4b5563' }}>
-                      <span style={{ fontWeight: 600 }}>
-                        {exp.mentor ? 'Mentor' : 'Advisor'}:
-                      </span>{' '}
-                      {exp.mentor ?? exp.advisor}
-                    </p>
-                  )}
-                </div>
+                Published
+              </p>
+              <div>
+                {published.map((pub, i) => (
+                  <PubRow key={pub.title} pub={pub} index={i + 1} />
+                ))}
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+            </div>
+          )}
+
+          {underReview.length > 0 && (
+            <div>
+              <p
+                style={{
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '0.65rem',
+                  color: '#2d2d2d',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  marginBottom: '24px',
+                }}
+              >
+                Under Review
+              </p>
+              <div>
+                {underReview.map((pub, i) => (
+                  <PubRow key={pub.title} pub={pub} index={i + 1} dimmed />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Experience view */}
+      {tab === 'experience' && (
+        <div>
+          {experience.map((exp, i) => (
+            <ExpRow key={exp.role} exp={exp} isFirst={i === 0} />
+          ))}
+        </div>
+      )}
     </section>
   )
 }
 
-function PublicationCard({ pub }: { pub: Publication }) {
+function PubRow({ pub, index, dimmed = false }: { pub: Publication; index: number; dimmed?: boolean }) {
   return (
     <div
       style={{
-        background: 'white',
-        borderRadius: '14px',
-        padding: '22px 24px',
-        border: '1px solid #e5e7eb',
-        borderLeft: `4px solid ${pub.accentColor}`,
-        boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        position: 'relative',
+        display: 'grid',
+        gridTemplateColumns: '32px 1fr auto',
+        gap: '16px',
+        padding: '20px 0',
+        borderTop: '1px solid rgba(255,255,255,0.04)',
+        alignItems: 'start',
+        opacity: dimmed ? 0.5 : 1,
+        transition: 'opacity 0.2s',
       }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.08)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)'
-      }}
+      onMouseEnter={(e) => { e.currentTarget.style.opacity = '1' }}
+      onMouseLeave={(e) => { e.currentTarget.style.opacity = dimmed ? '0.5' : '1' }}
     >
-      {pub.award && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '-1px',
-            right: '16px',
-            background: 'linear-gradient(135deg, #f59e0b, #d97706)',
-            color: 'white',
-            fontSize: '0.72rem',
-            fontWeight: 700,
-            padding: '3px 10px',
-            borderRadius: '0 0 8px 8px',
-          }}
-        >
-          🏆 {pub.award}
-        </div>
-      )}
-
-      <h4
+      {/* Index */}
+      <span
         style={{
-          fontSize: '0.95rem',
-          fontWeight: 700,
-          color: '#1f2937',
-          marginBottom: '6px',
-          lineHeight: 1.4,
-          paddingTop: pub.award ? '12px' : '0',
+          fontFamily: 'var(--font-geist-mono), monospace',
+          fontSize: '0.65rem',
+          color: '#2d2d2d',
+          paddingTop: '3px',
         }}
       >
-        {pub.link ? (
-          <a
-            href={pub.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: 'inherit', textDecoration: 'none' }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#3b82f6')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#1f2937')}
+        {String(index).padStart(2, '0')}
+      </span>
+
+      {/* Title + authors */}
+      <div>
+        <h4
+          style={{
+            fontSize: '0.95rem',
+            fontWeight: 500,
+            color: '#c8c8c8',
+            lineHeight: 1.4,
+            marginBottom: '6px',
+            letterSpacing: '-0.005em',
+          }}
+        >
+          {pub.link ? (
+            <a
+              href={pub.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'inherit', transition: 'color 0.2s' }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#e8e8e8')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = '#c8c8c8')}
+            >
+              {pub.title} ↗
+            </a>
+          ) : pub.title}
+        </h4>
+        <p
+          style={{
+            fontSize: '0.78rem',
+            color: '#3d3d3d',
+            lineHeight: 1.5,
+            marginBottom: pub.award ? '8px' : '0',
+          }}
+        >
+          {pub.authors}
+        </p>
+        {pub.award && (
+          <span
+            style={{
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '0.62rem',
+              color: '#5a4a20',
+              letterSpacing: '0.06em',
+              textTransform: 'uppercase',
+              borderBottom: '1px solid #3a3010',
+              paddingBottom: '1px',
+            }}
           >
-            {pub.title}
-          </a>
-        ) : (
-          pub.title
+            {pub.award}
+          </span>
         )}
-      </h4>
+      </div>
 
-      <p style={{ fontSize: '0.85rem', color: '#4b5563', marginBottom: '10px' }}>
-        {pub.authors}
-      </p>
-
-      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+      {/* Venue + acceptance */}
+      <div style={{ textAlign: 'right', minWidth: '80px' }}>
         <span
           style={{
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            color: pub.status === 'published' ? pub.accentColor : '#9ca3af',
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.68rem',
+            color: '#3a3a3a',
+            display: 'block',
+            marginBottom: pub.acceptance ? '4px' : '0',
+            whiteSpace: 'nowrap',
           }}
         >
           {pub.venue}
         </span>
-
         {pub.acceptance && (
           <span
             style={{
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              padding: '2px 8px',
-              borderRadius: '10px',
-              background: '#dbeafe',
-              color: '#1e40af',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '0.6rem',
+              color: '#2a2a2a',
             }}
           >
-            Acceptance: {pub.acceptance}
-          </span>
-        )}
-
-        {pub.status === 'under_review' && (
-          <span
-            style={{
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              padding: '2px 8px',
-              borderRadius: '10px',
-              background: '#f3f4f6',
-              color: '#6b7280',
-            }}
-          >
-            Under Review
+            {pub.acceptance} acc.
           </span>
         )}
       </div>
+    </div>
+  )
+}
+
+function ExpRow({ exp, isFirst }: { exp: Experience; isFirst: boolean }) {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr auto',
+        gap: '24px',
+        padding: '28px 0',
+        borderTop: isFirst ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
+        borderBottom: '1px solid rgba(255,255,255,0.04)',
+        transition: 'background 0.2s',
+      }}
+      onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.012)')}
+      onMouseLeave={(e) => (e.currentTarget.style.background = 'transparent')}
+    >
+      <div>
+        <p
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.65rem',
+            color: '#2d2d2d',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginBottom: '8px',
+          }}
+        >
+          {exp.org}
+        </p>
+        <h3
+          style={{
+            fontSize: '1rem',
+            fontWeight: 500,
+            color: '#c8c8c8',
+            marginBottom: '6px',
+            letterSpacing: '-0.01em',
+          }}
+        >
+          {exp.role}
+        </h3>
+        {(exp.mentor || exp.advisor) && (
+          <p style={{ fontSize: '0.78rem', color: '#3a3a3a' }}>
+            {exp.mentor ? 'Mentor' : 'Advisor'}: {exp.mentor ?? exp.advisor}
+          </p>
+        )}
+      </div>
+      <span
+        style={{
+          fontFamily: 'var(--font-geist-mono), monospace',
+          fontSize: '0.68rem',
+          color: '#2d2d2d',
+          whiteSpace: 'nowrap',
+          paddingTop: '2px',
+        }}
+      >
+        {exp.period}
+      </span>
     </div>
   )
 }

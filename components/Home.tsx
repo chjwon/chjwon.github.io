@@ -2,14 +2,6 @@
 
 import { portfolio } from '../data/portfolio'
 
-const INTEREST_COLORS = [
-  { bg: 'linear-gradient(135deg, #3b82f6, #2563eb)', shadow: 'rgba(59,130,246,0.3)' },
-  { bg: 'linear-gradient(135deg, #10b981, #059669)', shadow: 'rgba(16,185,129,0.3)' },
-  { bg: 'linear-gradient(135deg, #8b5cf6, #7c3aed)', shadow: 'rgba(139,92,246,0.3)' },
-  { bg: 'linear-gradient(135deg, #ec4899, #db2777)', shadow: 'rgba(236,72,153,0.3)' },
-  { bg: 'linear-gradient(135deg, #f59e0b, #d97706)', shadow: 'rgba(245,158,11,0.3)' },
-]
-
 export default function Home() {
   const { name, title, affiliation, email, github, linkedin, googleScholar, researchInterests, bio } = portfolio
 
@@ -19,218 +11,157 @@ export default function Home() {
       style={{
         minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)',
-        position: 'relative',
-        overflow: 'hidden',
-        paddingTop: '64px',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        background: '#0c0c0c',
+        padding: '0 32px 64px',
+        paddingTop: '60px', /* nav height */
+        maxWidth: '1120px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      {/* Decorative background blobs */}
+      {/* Top metadata row */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
-          background: `
-            radial-gradient(circle at 20% 50%, rgba(59,130,246,0.08) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(139,92,246,0.08) 0%, transparent 50%),
-            radial-gradient(circle at 50% 80%, rgba(16,185,129,0.06) 0%, transparent 50%)
-          `,
-          pointerEvents: 'none',
-        }}
-      />
-
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          textAlign: 'center',
-          maxWidth: '780px',
-          padding: '60px 24px',
-          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 'auto',
+          paddingTop: '80px',
+          paddingBottom: '40px',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
         }}
       >
-        {/* Avatar placeholder */}
-        <div
+        <span
           style={{
-            width: '100px',
-            height: '100px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-            margin: '0 auto 28px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '2.5rem',
-            boxShadow: '0 8px 24px rgba(59,130,246,0.25)',
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.7rem',
+            color: '#3a3a3a',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
           }}
         >
-          👨‍💻
-        </div>
+          01 / Portfolio
+        </span>
+        <span
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.7rem',
+            color: '#3a3a3a',
+            letterSpacing: '0.06em',
+          }}
+        >
+          {affiliation}
+        </span>
+      </div>
 
+      {/* Main hero content — sits at bottom of viewport */}
+      <div style={{ paddingTop: '120px' }}>
+        {/* Name — the statement piece */}
         <h1
           style={{
-            fontSize: 'clamp(2rem, 6vw, 3.5rem)',
-            fontWeight: 800,
-            color: '#1f2937',
-            marginBottom: '12px',
-            letterSpacing: '-0.02em',
-            lineHeight: 1.1,
+            fontSize: 'clamp(3.2rem, 8.5vw, 8rem)',
+            fontWeight: 700,
+            color: '#e8e8e8',
+            letterSpacing: '-0.03em',
+            lineHeight: 0.95,
+            marginBottom: '48px',
           }}
         >
           {name}
         </h1>
 
-        <p
-          style={{
-            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-            color: '#3b82f6',
-            marginBottom: '6px',
-            fontWeight: 600,
-          }}
-        >
-          {title}
-        </p>
-
-        <p
-          style={{
-            fontSize: '1rem',
-            color: '#6b7280',
-            marginBottom: '28px',
-            fontWeight: 500,
-          }}
-        >
-          {affiliation}
-        </p>
-
-        <p
-          style={{
-            fontSize: '1rem',
-            color: '#4b5563',
-            lineHeight: 1.7,
-            maxWidth: '560px',
-            margin: '0 auto 36px',
-          }}
-        >
-          {bio}
-        </p>
-
-        {/* Research interest pills */}
+        {/* Bottom info row */}
         <div
           style={{
             display: 'flex',
-            justifyContent: 'center',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
+            gap: '40px',
             flexWrap: 'wrap',
-            gap: '10px',
-            marginBottom: '44px',
+            paddingTop: '32px',
+            borderTop: '1px solid rgba(255,255,255,0.06)',
           }}
         >
-          {researchInterests.map((interest, i) => {
-            const color = INTEREST_COLORS[i % INTEREST_COLORS.length]
-            return (
-              <span
-                key={interest}
+          {/* Left: title + bio */}
+          <div style={{ maxWidth: '480px' }}>
+            <p
+              style={{
+                fontSize: '0.9rem',
+                color: '#888',
+                marginBottom: '12px',
+                fontWeight: 500,
+              }}
+            >
+              {title}
+            </p>
+            <p
+              style={{
+                fontSize: '0.85rem',
+                color: '#555',
+                lineHeight: 1.7,
+                marginBottom: '24px',
+              }}
+            >
+              {bio}
+            </p>
+            {/* Research interests — inline text */}
+            <p
+              style={{
+                fontSize: '0.72rem',
+                fontFamily: 'var(--font-geist-mono), monospace',
+                color: '#3a3a3a',
+                letterSpacing: '0.04em',
+                textTransform: 'uppercase',
+              }}
+            >
+              {researchInterests.join(' · ')}
+            </p>
+          </div>
+
+          {/* Right: contact links */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '6px',
+              alignItems: 'flex-end',
+            }}
+          >
+            {[
+              { label: 'Email', href: `mailto:${email}` },
+              { label: 'GitHub', href: github },
+              { label: 'LinkedIn', href: linkedin },
+              { label: 'Scholar', href: googleScholar },
+            ].map(({ label, href }) => (
+              <a
+                key={label}
+                href={href}
+                target={href.startsWith('mailto') ? undefined : '_blank'}
+                rel="noopener noreferrer"
                 style={{
-                  padding: '8px 18px',
-                  borderRadius: '30px',
-                  fontSize: '0.85rem',
-                  fontWeight: 600,
-                  color: 'white',
-                  background: color.bg,
-                  boxShadow: `0 4px 12px ${color.shadow}`,
+                  fontSize: '0.78rem',
+                  color: '#444',
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  transition: 'color 0.2s',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
                 }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#d4d4d4')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = '#444')}
               >
-                {interest}
-              </span>
-            )
-          })}
-        </div>
-
-        {/* Contact buttons */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            gap: '12px',
-          }}
-        >
-          <ContactLink href={`mailto:${email}`} label="📧 Email" primary />
-          <ContactLink href={github} label="💻 GitHub" />
-          <ContactLink href={linkedin} label="💼 LinkedIn" />
-          <ContactLink href={googleScholar} label="🎓 Scholar" />
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          style={{
-            marginTop: '60px',
-            color: '#9ca3af',
-            fontSize: '1.4rem',
-            animation: 'bounce 2s ease-in-out infinite',
-            cursor: 'pointer',
-          }}
-          onClick={() =>
-            document.getElementById('education')?.scrollIntoView({ behavior: 'smooth' })
-          }
-        >
-          ↓
+                {label}
+                <span style={{ fontSize: '0.65rem', opacity: 0.5 }}>↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
-
-      <style>{`
-        @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(8px); }
-        }
-      `}</style>
     </section>
-  )
-}
-
-function ContactLink({
-  href,
-  label,
-  primary = false,
-}: {
-  href: string
-  label: string
-  primary?: boolean
-}) {
-  return (
-    <a
-      href={href}
-      target={href.startsWith('mailto') ? undefined : '_blank'}
-      rel="noopener noreferrer"
-      style={{
-        padding: '11px 24px',
-        borderRadius: '10px',
-        fontSize: '0.9rem',
-        fontWeight: 600,
-        textDecoration: 'none',
-        transition: 'all 0.2s ease',
-        background: primary ? 'linear-gradient(135deg, #3b82f6, #2563eb)' : 'white',
-        color: primary ? 'white' : '#374151',
-        border: primary ? 'none' : '1.5px solid #e5e7eb',
-        boxShadow: primary
-          ? '0 4px 14px rgba(59,130,246,0.3)'
-          : '0 2px 8px rgba(0,0,0,0.06)',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-2px)'
-        e.currentTarget.style.boxShadow = primary
-          ? '0 6px 20px rgba(59,130,246,0.4)'
-          : '0 4px 14px rgba(0,0,0,0.1)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)'
-        e.currentTarget.style.boxShadow = primary
-          ? '0 4px 14px rgba(59,130,246,0.3)'
-          : '0 2px 8px rgba(0,0,0,0.06)'
-      }}
-    >
-      {label}
-    </a>
   )
 }

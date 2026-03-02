@@ -1,7 +1,7 @@
 'use client'
 
 import { portfolio } from '../data/portfolio'
-import { SectionHeader } from './Education'
+import { SectionLabel } from './Education'
 
 export default function Others() {
   const { projects, hobbies } = portfolio
@@ -10,211 +10,171 @@ export default function Others() {
     <section
       id="others"
       style={{
-        padding: '100px 0',
-        background: 'white',
+        background: '#0c0c0c',
+        padding: '120px 32px',
+        maxWidth: '1120px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      <div style={{ maxWidth: '960px', margin: '0 auto', padding: '0 24px' }}>
-        <SectionHeader
-          title="Others"
-          subtitle="Personal projects and hobbies outside of research"
-        />
+      <SectionLabel index="04" title="Others" />
 
-        {/* Projects */}
-        <div style={{ marginBottom: '72px' }}>
-          <h3
-            style={{
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              color: '#1f2937',
-              marginBottom: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <span
+      {/* Projects */}
+      <div style={{ marginBottom: '80px' }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.65rem',
+            color: '#2d2d2d',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            marginBottom: '24px',
+          }}
+        >
+          Projects
+        </p>
+
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: '1px',
+            background: 'rgba(255,255,255,0.05)',
+            border: '1px solid rgba(255,255,255,0.05)',
+          }}
+        >
+          {projects.map((project) => (
+            <div
+              key={project.name}
               style={{
-                display: 'inline-block',
-                width: '8px',
-                height: '24px',
-                borderRadius: '4px',
-                background: 'linear-gradient(180deg, #3b82f6, #8b5cf6)',
+                background: '#0c0c0c',
+                padding: '28px',
+                transition: 'background 0.2s',
               }}
-            />
-            Projects
-          </h3>
-
-          {/* Auto-flowing grid — add items to portfolio.ts, layout auto-adjusts */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-              gap: '20px',
-            }}
-          >
-            {projects.map((project) => (
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#111')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = '#0c0c0c')}
+            >
               <div
-                key={project.name}
                 style={{
-                  background: '#f8fafc',
-                  border: '1px solid #e5e7eb',
-                  borderRadius: '14px',
-                  padding: '24px',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease',
-                  cursor: project.link ? 'pointer' : 'default',
-                  position: 'relative',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)'
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)'
-                  e.currentTarget.style.background = 'white'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
-                  e.currentTarget.style.background = '#f8fafc'
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  marginBottom: '10px',
                 }}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    justifyContent: 'space-between',
-                    marginBottom: '10px',
-                  }}
-                >
-                  <h4
-                    style={{
-                      fontSize: '1rem',
-                      fontWeight: 700,
-                      color: '#1f2937',
-                    }}
-                  >
-                    {project.name}
-                  </h4>
-                  {project.link && (
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        fontSize: '1rem',
-                        color: '#6b7280',
-                        textDecoration: 'none',
-                        flexShrink: 0,
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.color = '#3b82f6')}
-                      onMouseLeave={(e) => (e.currentTarget.style.color = '#6b7280')}
-                    >
-                      ↗
-                    </a>
-                  )}
-                </div>
-
-                <p
-                  style={{
-                    fontSize: '0.875rem',
-                    color: '#4b5563',
-                    lineHeight: 1.6,
-                    marginBottom: '16px',
-                  }}
-                >
-                  {project.description}
-                </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      style={{
-                        padding: '3px 10px',
-                        borderRadius: '20px',
-                        fontSize: '0.75rem',
-                        fontWeight: 600,
-                        background: '#eff6ff',
-                        color: '#3b82f6',
-                      }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Hobbies */}
-        <div>
-          <h3
-            style={{
-              fontSize: '1.3rem',
-              fontWeight: 700,
-              color: '#1f2937',
-              marginBottom: '24px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-            }}
-          >
-            <span
-              style={{
-                display: 'inline-block',
-                width: '8px',
-                height: '24px',
-                borderRadius: '4px',
-                background: 'linear-gradient(180deg, #10b981, #059669)',
-              }}
-            />
-            Hobbies &amp; Interests
-          </h3>
-
-          {/* Auto-flowing grid for hobbies too */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-              gap: '16px',
-            }}
-          >
-            {hobbies.map((hobby) => (
-              <div
-                key={hobby.name}
-                style={{
-                  background: '#f0fdf4',
-                  border: '1px solid #bbf7d0',
-                  borderRadius: '14px',
-                  padding: '22px',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                  textAlign: 'center',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)'
-                  e.currentTarget.style.boxShadow = '0 8px 24px rgba(16,185,129,0.12)'
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)'
-                  e.currentTarget.style.boxShadow = 'none'
-                }}
-              >
-                <div style={{ fontSize: '2.4rem', marginBottom: '10px' }}>{hobby.icon}</div>
                 <h4
                   style={{
-                    fontSize: '0.95rem',
-                    fontWeight: 700,
-                    color: '#1f2937',
-                    marginBottom: '6px',
+                    fontSize: '0.9rem',
+                    fontWeight: 500,
+                    color: '#c8c8c8',
+                    letterSpacing: '-0.01em',
                   }}
                 >
-                  {hobby.name}
+                  {project.name}
                 </h4>
-                <p style={{ fontSize: '0.82rem', color: '#4b5563', lineHeight: 1.5 }}>
-                  {hobby.description}
-                </p>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontFamily: 'var(--font-geist-mono), monospace',
+                      fontSize: '0.65rem',
+                      color: '#2d2d2d',
+                      transition: 'color 0.2s',
+                      flexShrink: 0,
+                      marginLeft: '8px',
+                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.color = '#888')}
+                    onMouseLeave={(e) => (e.currentTarget.style.color = '#2d2d2d')}
+                  >
+                    ↗
+                  </a>
+                )}
               </div>
-            ))}
-          </div>
+              <p
+                style={{
+                  fontSize: '0.82rem',
+                  color: '#3d3d3d',
+                  lineHeight: 1.6,
+                  marginBottom: '16px',
+                }}
+              >
+                {project.description}
+              </p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontFamily: 'var(--font-geist-mono), monospace',
+                      fontSize: '0.62rem',
+                      color: '#2d2d2d',
+                      letterSpacing: '0.05em',
+                      textTransform: 'uppercase',
+                      border: '1px solid rgba(255,255,255,0.06)',
+                      padding: '2px 7px',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Hobbies */}
+      <div>
+        <p
+          style={{
+            fontFamily: 'var(--font-geist-mono), monospace',
+            fontSize: '0.65rem',
+            color: '#2d2d2d',
+            letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+            marginBottom: '24px',
+          }}
+        >
+          Interests &amp; Hobbies
+        </p>
+
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {hobbies.map((hobby, i) => (
+            <div
+              key={hobby.name}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '200px 1fr',
+                gap: '24px',
+                padding: '16px 0',
+                borderTop: i === 0 ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
+                alignItems: 'start',
+              }}
+            >
+              <span
+                style={{
+                  fontSize: '0.85rem',
+                  color: '#555',
+                  fontWeight: 500,
+                }}
+              >
+                {hobby.name}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.82rem',
+                  color: '#333',
+                  lineHeight: 1.6,
+                }}
+              >
+                {hobby.description}
+              </span>
+            </div>
+          ))}
+          <div style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }} />
         </div>
       </div>
     </section>

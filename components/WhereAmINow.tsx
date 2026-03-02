@@ -1,176 +1,165 @@
 'use client'
 
 import { portfolio } from '../data/portfolio'
-import { SectionHeader } from './Education'
+import { SectionLabel } from './Education'
 
 export default function WhereAmINow() {
   const { currentLocation, email } = portfolio
+
+  const fields: Array<{ label: string; value: string }> = [
+    { label: 'Location', value: `${currentLocation.city}, ${currentLocation.state}, ${currentLocation.country}` },
+    { label: 'Affiliation', value: currentLocation.affiliation },
+    { label: 'Department', value: currentLocation.department },
+    { label: 'Lab', value: currentLocation.lab },
+    { label: 'Advisor', value: currentLocation.advisor },
+    { label: 'Status', value: currentLocation.status },
+    { label: 'Since', value: currentLocation.startYear },
+  ]
+
+  const openTo = [
+    'Research Collaborations',
+    'Internship Opportunities',
+    'Paper Reviews',
+    'Academic Discussions',
+  ]
 
   return (
     <section
       id="where-am-i-now"
       style={{
-        padding: '100px 0',
-        background: 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
+        background: '#0c0c0c',
+        padding: '120px 32px 160px',
+        maxWidth: '1120px',
+        margin: '0 auto',
+        width: '100%',
+        boxSizing: 'border-box',
       }}
     >
-      <div style={{ maxWidth: '780px', margin: '0 auto', padding: '0 24px' }}>
-        <SectionHeader
-          title="Where Am I Now"
-          subtitle="Current location and affiliation"
-        />
+      <SectionLabel index="05" title="Where Am I Now" />
 
-        {/* Main status card */}
-        <div
-          style={{
-            background: 'white',
-            borderRadius: '20px',
-            padding: '40px',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
-            border: '1px solid #e5e7eb',
-            marginBottom: '24px',
-          }}
-        >
-          {/* Location header */}
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-start',
-              gap: '20px',
-              marginBottom: '32px',
-              flexWrap: 'wrap',
-            }}
-          >
+      {/* Statement line */}
+      <p
+        style={{
+          fontSize: 'clamp(1.4rem, 3.5vw, 2.2rem)',
+          fontWeight: 600,
+          color: '#555',
+          letterSpacing: '-0.02em',
+          lineHeight: 1.3,
+          marginBottom: '64px',
+          maxWidth: '600px',
+        }}
+      >
+        Currently at{' '}
+        <span style={{ color: '#c8c8c8' }}>{currentLocation.affiliation}</span>
+        {' '}pursuing a Ph.D. in{' '}
+        <span style={{ color: '#c8c8c8' }}>Computer Science</span>.
+      </p>
+
+      {/* Two-column: fields + open to */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '64px',
+        }}
+      >
+        {/* Key-value table */}
+        <div>
+          {fields.map((field, i) => (
             <div
+              key={field.label}
               style={{
-                width: '64px',
-                height: '64px',
-                borderRadius: '16px',
-                background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '1.8rem',
-                flexShrink: 0,
-                boxShadow: '0 4px 14px rgba(59,130,246,0.25)',
+                display: 'grid',
+                gridTemplateColumns: '120px 1fr',
+                gap: '16px',
+                padding: '12px 0',
+                borderTop: i === 0 ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(255,255,255,0.04)',
               }}
             >
-              📍
-            </div>
-            <div>
-              <h3
+              <span
                 style={{
-                  fontSize: '1.4rem',
-                  fontWeight: 800,
-                  color: '#1f2937',
-                  marginBottom: '4px',
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: '0.65rem',
+                  color: '#2d2d2d',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase',
+                  paddingTop: '2px',
                 }}
               >
-                {currentLocation.city}, {currentLocation.state}
-              </h3>
-              <p style={{ fontSize: '0.95rem', color: '#6b7280', fontWeight: 500 }}>
-                {currentLocation.country}
-              </p>
+                {field.label}
+              </span>
+              <span
+                style={{
+                  fontSize: '0.85rem',
+                  color: '#888',
+                  lineHeight: 1.4,
+                }}
+              >
+                {field.value}
+              </span>
             </div>
-          </div>
-
-          {/* Info grid */}
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-              gap: '20px',
-            }}
-          >
-            <InfoItem
-              icon="🏫"
-              label="Affiliation"
-              value={currentLocation.affiliation}
-              accent="#3b82f6"
-            />
-            <InfoItem
-              icon="🔬"
-              label="Department"
-              value={currentLocation.department}
-              accent="#8b5cf6"
-            />
-            <InfoItem
-              icon="🧪"
-              label="Lab"
-              value={currentLocation.lab}
-              accent="#10b981"
-            />
-            <InfoItem
-              icon="👨‍🏫"
-              label="Advisor"
-              value={currentLocation.advisor}
-              accent="#f59e0b"
-            />
-            <InfoItem
-              icon="🎓"
-              label="Status"
-              value={currentLocation.status}
-              accent="#ec4899"
-            />
-            <InfoItem
-              icon="📅"
-              label="Started"
-              value={currentLocation.startYear}
-              accent="#06b6d4"
-            />
-          </div>
+          ))}
+          <div style={{ borderBottom: '1px solid rgba(255,255,255,0.04)' }} />
         </div>
 
-        {/* Currently open to */}
-        <div
-          style={{
-            background: 'linear-gradient(135deg, #eff6ff, #f5f3ff)',
-            borderRadius: '16px',
-            padding: '28px 32px',
-            border: '1px solid #c7d2fe',
-          }}
-        >
-          <h4
+        {/* Open to */}
+        <div>
+          <p
             style={{
-              fontSize: '1rem',
-              fontWeight: 700,
-              color: '#1e40af',
-              marginBottom: '12px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
+              fontFamily: 'var(--font-geist-mono), monospace',
+              fontSize: '0.65rem',
+              color: '#2d2d2d',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              marginBottom: '24px',
             }}
           >
-            <span>💬</span> Open to
-          </h4>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-            {[
-              'Research Collaborations',
-              'Internship Opportunities',
-              'Paper Reviews',
-              'Academic Discussions',
-            ].map((item) => (
+            Open To
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '32px' }}>
+            {openTo.map((item) => (
               <span
                 key={item}
                 style={{
-                  padding: '6px 14px',
-                  borderRadius: '20px',
                   fontSize: '0.85rem',
-                  fontWeight: 600,
-                  background: 'white',
-                  color: '#3b82f6',
-                  border: '1.5px solid #bfdbfe',
+                  color: '#555',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
                 }}
               >
+                <span
+                  style={{
+                    display: 'inline-block',
+                    width: '3px',
+                    height: '3px',
+                    borderRadius: '50%',
+                    background: '#2d2d2d',
+                    flexShrink: 0,
+                  }}
+                />
                 {item}
               </span>
             ))}
           </div>
-          <p style={{ marginTop: '16px', fontSize: '0.875rem', color: '#4b5563' }}>
-            Feel free to reach out at{' '}
+          <p style={{ fontSize: '0.82rem', color: '#333' }}>
+            Reach out at{' '}
             <a
               href={`mailto:${email}`}
-              style={{ color: '#3b82f6', fontWeight: 600, textDecoration: 'none' }}
+              style={{
+                color: '#555',
+                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                paddingBottom: '1px',
+                transition: 'color 0.2s, border-color 0.2s',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = '#d4d4d4'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = '#555'
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'
+              }}
             >
               {email}
             </a>
@@ -178,53 +167,5 @@ export default function WhereAmINow() {
         </div>
       </div>
     </section>
-  )
-}
-
-function InfoItem({
-  icon,
-  label,
-  value,
-  accent,
-}: {
-  icon: string
-  label: string
-  value: string
-  accent: string
-}) {
-  return (
-    <div
-      style={{
-        background: '#f8fafc',
-        borderRadius: '12px',
-        padding: '16px 18px',
-        border: '1px solid #e5e7eb',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          marginBottom: '6px',
-        }}
-      >
-        <span style={{ fontSize: '1.1rem' }}>{icon}</span>
-        <span
-          style={{
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            color: accent,
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-          }}
-        >
-          {label}
-        </span>
-      </div>
-      <p style={{ fontSize: '0.9rem', fontWeight: 600, color: '#1f2937', margin: 0 }}>
-        {value}
-      </p>
-    </div>
   )
 }

@@ -8,48 +8,36 @@ const NAV_LINKS = [
   { label: 'Education', href: '#education' },
   { label: 'Research', href: '#research' },
   { label: 'Others', href: '#others' },
-  { label: 'Where Am I Now', href: '#where-am-i-now' },
+  { label: 'Now', href: '#where-am-i-now' },
 ]
 
 export default function NavBar() {
   const [activeSection, setActiveSection] = useState('home')
-  const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     const sectionIds = ['home', 'education', 'research', 'others', 'where-am-i-now']
     const observers: IntersectionObserver[] = []
-
     sectionIds.forEach((id) => {
       const el = document.getElementById(id)
       if (!el) return
       const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveSection(id)
-        },
-        { threshold: 0.3 }
+        ([entry]) => { if (entry.isIntersecting) setActiveSection(id) },
+        { threshold: 0.25 }
       )
       obs.observe(el)
       observers.push(obs)
     })
-
     return () => observers.forEach((o) => o.disconnect())
   }, [])
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    const id = href.replace('#', '')
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
     setMenuOpen(false)
   }
+
+  const initials = portfolio.name.split(' ').map((n) => n[0]).join('')
 
   return (
     <nav
@@ -59,47 +47,44 @@ export default function NavBar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        transition: 'background 0.3s ease, box-shadow 0.3s ease',
-        background: scrolled ? 'rgba(255,255,255,0.95)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        boxShadow: scrolled ? '0 1px 12px rgba(0,0,0,0.08)' : 'none',
+        background: 'rgba(12,12,12,0.92)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
       }}
     >
       <div
         style={{
-          maxWidth: '1100px',
+          maxWidth: '1120px',
           margin: '0 auto',
-          padding: '0 24px',
+          padding: '0 32px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          height: '64px',
+          height: '60px',
         }}
       >
-        {/* Logo / Name */}
+        {/* Name / Initials */}
         <a
           href="#home"
           onClick={(e) => handleNavClick(e, '#home')}
           style={{
-            fontWeight: 700,
-            fontSize: '1.1rem',
-            color: scrolled ? '#1f2937' : '#1f2937',
-            textDecoration: 'none',
-            letterSpacing: '-0.01em',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            color: '#d4d4d4',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            fontFamily: 'var(--font-geist-mono), monospace',
+            transition: 'color 0.2s',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = '#e8e8e8')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = '#d4d4d4')}
         >
-          {portfolio.name.split(' ').slice(0, 2).join(' ')}
+          {initials}
         </a>
 
-        {/* Desktop Links */}
-        <div
-          style={{
-            display: 'flex',
-            gap: '4px',
-            alignItems: 'center',
-          }}
-          className="nav-desktop"
-        >
+        {/* Desktop nav */}
+        <div style={{ display: 'flex', gap: '2px', alignItems: 'center' }} className="nav-desktop">
           {NAV_LINKS.map(({ label, href }) => {
             const id = href.replace('#', '')
             const isActive = activeSection === id
@@ -109,28 +94,18 @@ export default function NavBar() {
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
                 style={{
-                  padding: '8px 14px',
-                  borderRadius: '8px',
-                  fontSize: '0.9rem',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? '#3b82f6' : '#374151',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                  background: isActive ? '#eff6ff' : 'transparent',
-                  position: 'relative',
+                  padding: '6px 12px',
+                  fontSize: '0.72rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.06em',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  color: isActive ? '#e8e8e8' : '#444',
+                  transition: 'color 0.2s',
+                  borderRadius: '3px',
                 }}
-                onMouseEnter={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = '#f9fafb'
-                    e.currentTarget.style.color = '#1f2937'
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!isActive) {
-                    e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.color = '#374151'
-                  }
-                }}
+                onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.color = '#888' }}
+                onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.color = '#444' }}
               >
                 {label}
               </a>
@@ -138,35 +113,37 @@ export default function NavBar() {
           })}
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
+          className="nav-mobile-btn"
           style={{
             display: 'none',
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            padding: '8px',
-            color: '#374151',
-            fontSize: '1.5rem',
+            color: '#888',
+            fontSize: '0.75rem',
+            fontFamily: 'var(--font-geist-mono), monospace',
+            letterSpacing: '0.06em',
+            textTransform: 'uppercase',
+            padding: '4px',
           }}
-          className="nav-mobile-btn"
           aria-label="Toggle menu"
         >
-          {menuOpen ? '✕' : '☰'}
+          {menuOpen ? 'close' : 'menu'}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       {menuOpen && (
         <div
-          style={{
-            background: 'rgba(255,255,255,0.97)',
-            backdropFilter: 'blur(12px)',
-            borderTop: '1px solid #e5e7eb',
-            padding: '12px 24px 20px',
-          }}
           className="nav-mobile-menu"
+          style={{
+            background: '#0e0e0e',
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            padding: '16px 32px 24px',
+          }}
         >
           {NAV_LINKS.map(({ label, href }) => {
             const id = href.replace('#', '')
@@ -178,14 +155,13 @@ export default function NavBar() {
                 onClick={(e) => handleNavClick(e, href)}
                 style={{
                   display: 'block',
-                  padding: '12px 16px',
-                  borderRadius: '8px',
-                  fontSize: '1rem',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? '#3b82f6' : '#374151',
-                  textDecoration: 'none',
-                  background: isActive ? '#eff6ff' : 'transparent',
-                  marginBottom: '4px',
+                  padding: '12px 0',
+                  fontSize: '0.85rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.04em',
+                  color: isActive ? '#e8e8e8' : '#555',
+                  borderBottom: '1px solid rgba(255,255,255,0.04)',
+                  transition: 'color 0.2s',
                 }}
               >
                 {label}
@@ -196,11 +172,11 @@ export default function NavBar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        @media (max-width: 640px) {
           .nav-desktop { display: none !important; }
           .nav-mobile-btn { display: block !important; }
         }
-        @media (min-width: 769px) {
+        @media (min-width: 641px) {
           .nav-mobile-menu { display: none !important; }
         }
       `}</style>

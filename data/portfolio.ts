@@ -24,7 +24,7 @@ export interface Publication {
   award?: string;
   status: 'published' | 'under_review';
   link?: string;
-  accentColor: string;
+  // accentColor: string;
 }
 
 export interface Experience {
@@ -35,7 +35,7 @@ export interface Experience {
   advisor?: string;
   logo: string;
   abbreviation: string; // fallback if image fails
-  accentColor: string;
+  // accentColor: string;
 }
 
 export interface Project {
@@ -91,7 +91,7 @@ export const portfolio: PortfolioData = {
   linkedin: 'https://www.linkedin.com/in/jae-won-choi/',
   googleScholar: 'https://scholar.google.com/citations?user=4s95lKgAAAAJ&hl=ko',
 
-  bio: 'I am a Ph.D. student in Computer Science at the University of Southern California. My research focuses on geometric deep learning, graph neural networks, and physics-informed machine learning, with applications in computational biology and environmental science.',
+  bio: 'I am a Ph.D. student in Computer Science at the University of Southern California. My research focuses on geometric deep learning, graph neural networks, and physics-informed machine learning, with applications in computational biology.',
 
   // ── Research Interests ──────────────────────────────────────
   researchInterests: [
@@ -125,48 +125,43 @@ export const portfolio: PortfolioData = {
   // status: 'published' | 'under_review'
   publications: [
     {
+      title: 'MemeInterpret: Towards an All-in-One Dataset for Meme Understanding',
+      authors: 'Park J., Nguyen K., Park J., Kim J., Lee J., Choi J., et al.',
+      venue: 'EMNLP 2025 Findings',
+      status: 'published',
+    },
+    {
       title: 'SNN-PDE: Learning Dynamic PDEs from Data with Simplicial Neural Networks',
       authors: 'Choi J., Chen Y., Lee H., Kim H., Gel Y.',
       venue: 'AAAI 2024',
       acceptance: '23.75%',
       status: 'published',
-      accentColor: '#3b82f6',
     },
     {
       title: 'Revisiting Link Prediction with the Dowker Complex',
       authors: 'Choi J., Chen Y., Frías J. Castillo J., Gel Y.',
       venue: 'PAKDD 2024',
-      award: 'Best Paper — ASA Statistical Graphics',
+      award: 'Best Paper — ASA Statistical Graphics 2024',
       status: 'published',
-      accentColor: '#f59e0b',
     },
     {
       title: 'Self-supervised Contrastive Learning for Wildfire Detection',
       authors: 'Choi J., LaHaye N., Chen Y., Lee H., Gel Y.',
       venue: 'Elsevier Book Chapter / GeoAI 2024',
       status: 'published',
-      accentColor: '#10b981',
     },
-    {
-      title: 'MCR-LSTM: Market Condition-Recognized Approach for Cryptocurrency Trading',
-      authors: 'Choi J., Choi Y.',
-      venue: 'Financial Management Conference 2024 (Asia/Pacific)',
-      status: 'published',
-      accentColor: '#8b5cf6',
-    },
+
     {
       title: 'Keep Your Boundaries: From Finite Elements to Simplicial Convolution',
       authors: 'Choi J., Chen Y., Xia K., Rondon I., Gel Y.',
       venue: 'Under Review',
       status: 'under_review',
-      accentColor: '#6b7280',
     },
     {
       title: 'DKTM: Dynamic Keyword-based Topic Modeling for Lifelong Learning',
       authors: 'Choi J., Nguyen V.',
       venue: 'UTD Research Scholar Award',
       status: 'under_review',
-      accentColor: '#6b7280',
     },
   ],
 
@@ -179,7 +174,6 @@ export const portfolio: PortfolioData = {
       mentor: 'Kyo Lee',
       logo: '/images/nasa-logo.png',
       abbreviation: 'NASA',
-      accentColor: '#3b82f6',
     },
     {
       role: 'Naval Research Enterprise Internship Program (NREIP)',
@@ -188,7 +182,6 @@ export const portfolio: PortfolioData = {
       advisor: 'Rowe Neil',
       logo: '/images/naval-logo.png',
       abbreviation: 'NPS',
-      accentColor: '#1c47d3',
     },
     {
       role: 'Undergraduate Research Assistant',
@@ -197,7 +190,6 @@ export const portfolio: PortfolioData = {
       advisor: 'Vincent Ng',
       logo: '/images/utd-logo.png',
       abbreviation: 'UTD',
-      accentColor: '#f97316',
     },
     {
       role: 'Analytics Software Engineering Intern',
@@ -205,7 +197,6 @@ export const portfolio: PortfolioData = {
       period: 'Jun – Aug 2022',
       logo: '/images/nasdaq-logo.png',
       abbreviation: 'NDAQ',
-      accentColor: '#06b6d4',
     },
     {
       role: 'Backend Developer Intern',
@@ -213,7 +204,6 @@ export const portfolio: PortfolioData = {
       period: 'Mar – Jun 2021',
       logo: '/images/quantit-logo.png',
       abbreviation: 'QNTIT',
-      accentColor: '#ec4899',
     },
   ],
 
@@ -221,37 +211,38 @@ export const portfolio: PortfolioData = {
   // Add/remove items freely — the layout auto-adjusts
   projects: [
     {
-      name: '[Project 1]',
-      description: '[Describe what this project does and why you built it]',
-      tags: ['[Language]', '[Framework]'],
-      link: '',
+      name: 'arXiv Paper PDF Renamer',
+      description: 'A Chrome extension that automatically renames arXiv paper PDFs to include the title and author information.',
+      tags: ['TypeScript', 'Chrome Extension'],
+      link: 'https://chromewebstore.google.com/detail/arxiv-paper-pdf-renamer/mjceeaifcoknbgoblkanebjklknnondl',
     },
-    {
-      name: '[Project 2]',
-      description: '[Describe what this project does and why you built it]',
-      tags: ['[Language]', '[Tool]'],
-      link: '',
-    },
+    // {
+    //   name: '[Project 2]',
+    //   description: '[Describe what this project does and why you built it]',
+    //   tags: ['[Language]', '[Tool]'],
+    //   link: '',
+    // },
+
   ],
 
   // ── Hobbies (Others section) ─────────────────────────────────
   // Add/remove items freely — the layout auto-adjusts
   hobbies: [
     {
-      name: '[Hobby 1]',
-      description: '[Brief description of this hobby]',
-      icon: '🎯',
+      name: 'USC Overwatch Team Varsity',
+      description: 'Flex dps player on the Overwatch team at USC, since 2025.',
+      icon: '🎮',
     },
     {
-      name: '[Hobby 2]',
-      description: '[Brief description of this hobby]',
-      icon: '🎨',
+      name: 'Badminton',
+      description: 'Played badminton since 2017, competing in various local and regional tournaments.',
+      icon: '🏸',
     },
-    {
-      name: '[Hobby 3]',
-      description: '[Brief description of this hobby]',
-      icon: '📚',
-    },
+    // {
+    //   name: '[Hobby 3]',
+    //   description: '[Brief description of this hobby]',
+    //   icon: '📚',
+    // },
   ],
 
   // ── Where Am I Now ───────────────────────────────────────────
